@@ -32,7 +32,7 @@ namespace WindowsFormsApp3
             this.label1 = new System.Windows.Forms.Label();
             this.lblPeople = new System.Windows.Forms.Label();
             this.lboxOrderList = new System.Windows.Forms.ListBox();
-            this.lblTotalPrice = new System.Windows.Forms.Label();
+            this.lbl = new System.Windows.Forms.Label();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.chkTax = new System.Windows.Forms.CheckBox();
@@ -42,6 +42,7 @@ namespace WindowsFormsApp3
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.lblTotalPriceSum = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,16 +79,16 @@ namespace WindowsFormsApp3
             this.lboxOrderList.TabIndex = 2;
             this.lboxOrderList.SelectedIndexChanged += new System.EventHandler(this.lboxOrderList_SelectedIndexChanged);
             // 
-            // lblTotalPrice
+            // lbl
             // 
-            this.lblTotalPrice.AutoSize = true;
-            this.lblTotalPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.lblTotalPrice.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblTotalPrice.Location = new System.Drawing.Point(240, 498);
-            this.lblTotalPrice.Name = "lblTotalPrice";
-            this.lblTotalPrice.Size = new System.Drawing.Size(125, 16);
-            this.lblTotalPrice.TabIndex = 3;
-            this.lblTotalPrice.Text = "訂單總價 XXX元";
+            this.lbl.AutoSize = true;
+            this.lbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.lbl.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbl.Location = new System.Drawing.Point(227, 498);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(88, 16);
+            this.lbl.TabIndex = 3;
+            this.lbl.Text = "訂單總價：";
             // 
             // btnRemove
             // 
@@ -198,19 +199,30 @@ namespace WindowsFormsApp3
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // lblTotalPriceSum
+            // 
+            this.lblTotalPriceSum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.lblTotalPriceSum.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblTotalPriceSum.Location = new System.Drawing.Point(308, 498);
+            this.lblTotalPriceSum.Name = "lblTotalPriceSum";
+            this.lblTotalPriceSum.Size = new System.Drawing.Size(60, 16);
+            this.lblTotalPriceSum.TabIndex = 13;
+            this.lblTotalPriceSum.Text = "-元";
+            // 
             // FormCart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
             this.ClientSize = new System.Drawing.Size(393, 523);
+            this.Controls.Add(this.lblTotalPriceSum);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chkTax);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnRemove);
-            this.Controls.Add(this.lblTotalPrice);
+            this.Controls.Add(this.lbl);
             this.Controls.Add(this.lboxOrderList);
             this.Controls.Add(this.lblPeople);
             this.Controls.Add(this.label1);
@@ -230,7 +242,7 @@ namespace WindowsFormsApp3
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblPeople;
         private System.Windows.Forms.ListBox lboxOrderList;
-        private System.Windows.Forms.Label lblTotalPrice;
+        private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.CheckBox chkTax;
@@ -240,5 +252,6 @@ namespace WindowsFormsApp3
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label lblTotalPriceSum;
     }
 }

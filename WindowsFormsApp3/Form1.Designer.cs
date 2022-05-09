@@ -85,7 +85,7 @@ namespace WindowsFormsApp3
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(392, 150);
+            this.label4.Location = new System.Drawing.Point(381, 150);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 16);
             this.label4.TabIndex = 3;
@@ -95,7 +95,7 @@ namespace WindowsFormsApp3
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(392, 221);
+            this.label5.Location = new System.Drawing.Point(381, 221);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 16);
             this.label5.TabIndex = 4;
@@ -105,11 +105,11 @@ namespace WindowsFormsApp3
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("新細明體", 12F);
-            this.label6.Location = new System.Drawing.Point(393, 286);
+            this.label6.Location = new System.Drawing.Point(382, 286);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 16);
+            this.label6.Size = new System.Drawing.Size(114, 16);
             this.label6.TabIndex = 5;
-            this.label6.Text = "配料";
+            this.label6.Text = "配料(最多三樣)";
             // 
             // label7
             // 
@@ -148,9 +148,9 @@ namespace WindowsFormsApp3
             this.lblPrice.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lblPrice.Location = new System.Drawing.Point(179, 434);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(67, 19);
+            this.lblPrice.Size = new System.Drawing.Size(15, 19);
             this.lblPrice.TabIndex = 9;
-            this.lblPrice.Text = "XXX元";
+            this.lblPrice.Text = "-";
             // 
             // lblTotalPrice
             // 
@@ -159,9 +159,9 @@ namespace WindowsFormsApp3
             this.lblTotalPrice.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lblTotalPrice.Location = new System.Drawing.Point(311, 434);
             this.lblTotalPrice.Name = "lblTotalPrice";
-            this.lblTotalPrice.Size = new System.Drawing.Size(67, 19);
+            this.lblTotalPrice.Size = new System.Drawing.Size(15, 19);
             this.lblTotalPrice.TabIndex = 10;
-            this.lblTotalPrice.Text = "XXX元";
+            this.lblTotalPrice.Text = "-";
             // 
             // label12
             // 
@@ -227,7 +227,7 @@ namespace WindowsFormsApp3
             // cboxSweet
             // 
             this.cboxSweet.FormattingEnabled = true;
-            this.cboxSweet.Location = new System.Drawing.Point(395, 186);
+            this.cboxSweet.Location = new System.Drawing.Point(384, 186);
             this.cboxSweet.Name = "cboxSweet";
             this.cboxSweet.Size = new System.Drawing.Size(100, 20);
             this.cboxSweet.TabIndex = 17;
@@ -236,7 +236,7 @@ namespace WindowsFormsApp3
             // cboxIce
             // 
             this.cboxIce.FormattingEnabled = true;
-            this.cboxIce.Location = new System.Drawing.Point(396, 250);
+            this.cboxIce.Location = new System.Drawing.Point(385, 250);
             this.cboxIce.Name = "cboxIce";
             this.cboxIce.Size = new System.Drawing.Size(99, 20);
             this.cboxIce.TabIndex = 18;
@@ -245,7 +245,7 @@ namespace WindowsFormsApp3
             // cboxAdd
             // 
             this.cboxAdd.FormattingEnabled = true;
-            this.cboxAdd.Location = new System.Drawing.Point(396, 317);
+            this.cboxAdd.Location = new System.Drawing.Point(385, 317);
             this.cboxAdd.Name = "cboxAdd";
             this.cboxAdd.Size = new System.Drawing.Size(99, 20);
             this.cboxAdd.TabIndex = 19;

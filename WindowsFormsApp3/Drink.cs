@@ -10,6 +10,12 @@ namespace WindowsFormsApp3
     {
         public string Name = "";
         public int Price = 0;
+        public int TotalPrice = 0;
+        public int Cup = 0;
+        public string Sweet = "";
+        public string Ice = "";
+        public string[] Add=new string[3] ;
+        public int[] AddPrice = new int [3];
 
     }
 }

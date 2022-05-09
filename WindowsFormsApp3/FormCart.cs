@@ -15,7 +15,7 @@ namespace WindowsFormsApp3
     {
         bool isTax = false;
         int intDiscountNum = 0;
-        int intTotalPrice = 0;
+        int intTotalPriceSum = 0;
         public FormCart()
         {
             InitializeComponent();
@@ -23,22 +23,32 @@ namespace WindowsFormsApp3
 
         private void FormCart_Load(object sender, EventArgs e)
         {
+
             calTotal();
             lblPeople.Text = GlobalVar.orderPeople;
-            foreach (ArrayList arrOrderInfo in GlobalVar.listOrderInformation)
-            {//順序一定要正確
-                string strName = (string)arrOrderInfo[0];
-                int intPrice = (int)arrOrderInfo[1];
-                int intCup = (int)arrOrderInfo[2];
-                int intTotalPrice = (int)arrOrderInfo[3];
-                string strSweet = (string)arrOrderInfo[4];
-                string strIce = (string)arrOrderInfo[5];
-                string strAdd = (string)arrOrderInfo[6];
-                int intAddPrice = (int)arrOrderInfo[7];
+            foreach (Drink arrOrderInfo in GlobalVar.listOrderInformation)
+            {
+                string strName = arrOrderInfo.Name;
+                int intPrice =arrOrderInfo.Price;
+                int intCup =arrOrderInfo.Cup;
+                int intTotalPrice = arrOrderInfo.TotalPrice;
+                string strSweet = arrOrderInfo.Sweet;
+                string strIce = arrOrderInfo.Ice;
+                string strAdd = "";
+                int intAddPrice = 0;
+                for (int i = 0; i < arrOrderInfo.Add.Length; i++)
+                {
+                    if (arrOrderInfo.Add[i] != null)
+                    {
+                        strAdd += arrOrderInfo.Add[i] + " ,";
+                        intAddPrice += arrOrderInfo.AddPrice[i];
+                    }  
+                }
 
 
 
-                string strOneInfo = string.Format($"{strName},{intPrice},{intCup},{intTotalPrice},{strSweet},{strIce},{strAdd},{intAddPrice}");
+
+                string strOneInfo = string.Format($"{strName},{intPrice},{intCup},{intTotalPrice},{strSweet},{strIce},{strAdd}{intAddPrice}");
                 //可以用格式化輸出，變成類excel
                 lboxOrderList.Items.Add(strOneInfo);
             }
@@ -92,24 +102,25 @@ namespace WindowsFormsApp3
         private void radioDiscount1_CheckedChanged(object sender, EventArgs e)
         {
             intDiscountNum = 101;
-            calTotal();
         }
 
         private void radioDiscount2_CheckedChanged(object sender, EventArgs e)
         {
             intDiscountNum = 102;
-            calTotal();
         }
 
         private void radioDiscount3_CheckedChanged(object sender, EventArgs e)
         {
             intDiscountNum = 103;
-            calTotal();
         }
         void calTotal()
         {
             //作業：計算訂單總價
-
+            for (int i = 0; i < GlobalVar.listOrderInformation.Count; i ++)
+            {
+                intTotalPriceSum += GlobalVar.listOrderInformation[i].TotalPrice;
+            }
+            lblTotalPriceSum.Text = intTotalPriceSum.ToString() + "元";
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -156,16 +167,16 @@ namespace WindowsFormsApp3
             listOrderInfo.Add("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             listOrderInfo.Add("************訂購品項*************");
             //foreach 可以寫成方法 
-            foreach (ArrayList arrOrderInfo in GlobalVar.listOrderInformation)
-            {//順序一定要正確
-                string strName = (string)arrOrderInfo[0];
-                int intPrice = (int)arrOrderInfo[1];
-                int intCup = (int)arrOrderInfo[2];
-                int intTotalPrice = (int)arrOrderInfo[3];
-                string strSweet = (string)arrOrderInfo[4];
-                string strIce = (string)arrOrderInfo[5];
-                string strAdd = (string)arrOrderInfo[6];
-                int intAddPrice = (int)arrOrderInfo[7];
+            foreach (Drink arrOrderInfo in GlobalVar.listOrderInformation)
+            {
+                string strName = arrOrderInfo.Name;
+                int intPrice = arrOrderInfo.Price;
+                int intCup = arrOrderInfo.Cup;
+                int intTotalPrice = arrOrderInfo.TotalPrice;
+                string strSweet = arrOrderInfo.Sweet;
+                string strIce = arrOrderInfo.Ice;
+                string[] strAdd = arrOrderInfo.Add;
+                int[] intAddPrice = arrOrderInfo.AddPrice;
 
                 string strOneInfo = string.Format($"{strName},{intPrice},{intCup},{intTotalPrice},{strSweet},{strIce},{strAdd},{intAddPrice}");
                 //可以用格式化輸出，變成類excel
@@ -173,7 +184,7 @@ namespace WindowsFormsApp3
             }
             listOrderInfo.Add("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             listOrderInfo.Add("折扣：" + "稅金：");
-            listOrderInfo.Add("總價：" + intTotalPrice);
+            listOrderInfo.Add("總價：" + intTotalPriceSum);
             listOrderInfo.Add("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             listOrderInfo.Add("************謝謝惠顧*************");
 

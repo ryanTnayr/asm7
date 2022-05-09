@@ -14,8 +14,8 @@ namespace WindowsFormsApp3
     class GlobalVar
     {
         public static string orderPeople = "";
-        public static List<ArrayList> listOrderInformation = new List<ArrayList>();
-        //作業規格：品項資訊要由ArrayList 改成自訂類別Class
+        public static List<Drink> listOrderInformation = new List<Drink>();
+        //作業規格：品項資訊要由ArrayList 改成自訂類別Class OK
         public static Form1 formMenu;
         public static FormCart formCart;
     }
