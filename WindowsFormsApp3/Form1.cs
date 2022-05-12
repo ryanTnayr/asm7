@@ -1,4 +1,6 @@
-﻿using System;
+﻿//http://www.blueshop.com.tw/board/FUM20041006161839LRJ/BRD20120125215741HJ7.html
+// https://dotblogs.com.tw/freedomtrans/2011/06/03/27082
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,11 @@ using System.Collections;
 
 namespace WindowsFormsApp3
 {
+    /*
+     * 未解決課題： 
+     * 有無加eventhandler 有啥差?
+     * NotImplementedException
+    */
     public partial class Form1 : Form
     {
         //為了寫入清單而設的變數，傳遞訂單資訊時也需要
@@ -42,8 +49,7 @@ namespace WindowsFormsApp3
 
         Button btn = new Button();
         Button btn1 = new Button();
-        ComboBox cboxAdd2 = new ComboBox();
-        ComboBox cboxAdd3 = new ComboBox();
+
         public Form1()
         {
             InitializeComponent();
@@ -53,18 +59,18 @@ namespace WindowsFormsApp3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //載入清單內容  
+            //載入清單內容
             listName.AddRange(strNameTemp);
             lboxDrinkList.Items.AddRange(strNameTemp);
-           
-            listPrice.AddRange(intPriceTemp);           
-          
+
+            listPrice.AddRange(intPriceTemp);
+
             listSweet.AddRange(strSweetTemp);
             cboxSweet.Items.AddRange(strSweetTemp);
 
             listIce.AddRange(strIceTemp);
             cboxIce.Items.AddRange(strIceTemp);
-            
+
             listAdd.AddRange(strAddTemp);
             cboxAdd.Items.AddRange(strAddTemp);
 
@@ -77,7 +83,11 @@ namespace WindowsFormsApp3
 
         private void lboxDrinkList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //把配料選單隱藏，int[] intAddPrice 清空歸零 
+            //把配料選單隱藏，int[] intAddPrice 清空歸零
+            Array.Clear(strAdd, 0 , 3);
+            Array.Clear(intAddPrice, 0, 3);
+
+
             int selIndex = lboxDrinkList.SelectedIndex;
             strName = listName[selIndex];
             intPrice = listPrice[selIndex];
@@ -103,32 +113,30 @@ namespace WindowsFormsApp3
 
         private void cboxAdd_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //儲存所選
             int selIndex = cboxAdd.SelectedIndex;
             strAdd[0] = listAdd[selIndex];
             intAddPrice[0] = listAddPrice[selIndex];
-
+            //列印總金額
             intPrice = listPrice[lboxDrinkList.SelectedIndex];
             for (int i = 0; i < intAddPrice.Length; i++)
             {
                  intPrice += intAddPrice[i];
             }
             intTotalPrice = intPrice * intCup;
-
             lblTotalPrice.Text = intTotalPrice.ToString() + "元";
-
+            //產生按鈕
             btn.Location = new Point(385, 345);
             btn.Size = new Size(35, 25);
             btn.Text = "+";
             btn.BackColor = Color.Cyan;
             btn.Click += Btn_Click;
             Controls.Add(btn);
-
         }
 
         private void Btn_Click(object sender, EventArgs e)
         {
             btn.Hide();
-            
             cboxAdd2.Location = new Point(385,345);
             cboxAdd2.Size = new Size(99,20);
             cboxAdd2.Items.AddRange(strAddTemp);
@@ -138,17 +146,17 @@ namespace WindowsFormsApp3
 
         private void cboxAdd2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //儲存所選
             int selIndex = cboxAdd2.SelectedIndex;
             strAdd[1] = listAdd[selIndex];
             intAddPrice[1] = listAddPrice[selIndex];
-
+            //列印總金額
             intPrice = listPrice[lboxDrinkList.SelectedIndex];
             for (int i = 0; i < intAddPrice.Length; i++)
             {
                 intPrice += intAddPrice[i];
             }
             intTotalPrice = intPrice * intCup;
-
             lblTotalPrice.Text = intTotalPrice.ToString() + "元";
 
             btn1.Location = new Point(385, 370);
@@ -195,7 +203,10 @@ namespace WindowsFormsApp3
 
         private void txtDrinkNum_TextChanged(object sender, EventArgs e)
         {
-            Int32.TryParse(txtDrinkNum.Text,out intCup);
+            if(Int32.TryParse(txtDrinkNum.Text,out intCup) == false && txtDrinkNum.Text != "") //加 &&..... 避免空白也會被警告，空白錯誤交給加入購物車去擋
+            {
+                MessageBox.Show("請輸入1以上之整數");
+            }
             //intCup = Convert.ToInt32(txtDrinkNum.Text);  修改數字時，會先清除，這時會報錯，回報內容為空字串
             intTotalPrice = intPrice * intCup;
             lblTotalPrice.Text = intTotalPrice.ToString() + "元";
@@ -205,26 +216,34 @@ namespace WindowsFormsApp3
         {
             GlobalVar.formMenu = this;
             FormCart formCart = new FormCart();
-            GlobalVar.formCart = formCart;
+            GlobalVar.formCartVar = formCart;
             formCart.Show();
             this.Hide(); // Hide();也可以
         }
 
         private void btnAddCart_Click(object sender, EventArgs e)
         {
-            Drink drinkInformation = new Drink();
-            drinkInformation.Name = strName;
-            drinkInformation.Price = intPrice;
-            drinkInformation.Cup = intCup;
-            drinkInformation.Sweet = strSweet;
-            drinkInformation.Ice = strIce;
-            strAdd.CopyTo(drinkInformation.Add,0);  //用原本方法會有call by ref 的問題，因為資料型態是string[]
-            intAddPrice.CopyTo(drinkInformation.AddPrice,0);
-            drinkInformation.TotalPrice = intTotalPrice;
-            GlobalVar.listOrderInformation.Add(drinkInformation);
-            GlobalVar.orderPeople = txtTele.Text;
+            if (txtDrinkNum.Text == "")
+            {
+                MessageBox.Show("請輸入杯數");
+            }
+            else
+            {
+                Drink drinkInformation = new Drink();
+                drinkInformation.Name = strName;
+                drinkInformation.Price = intPrice;
+                drinkInformation.Cup = intCup;
+                drinkInformation.Sweet = strSweet;
+                drinkInformation.Ice = strIce;
+                strAdd.CopyTo(drinkInformation.Add, 0);  //用原本方法會有call by ref 的問題，因為資料型態是string[]
+                intAddPrice.CopyTo(drinkInformation.AddPrice, 0);
+                drinkInformation.TotalPrice = intTotalPrice;
+                GlobalVar.listOrderInformation.Add(drinkInformation);
+                GlobalVar.orderPeople = txtTele.Text;
 
-            MessageBox.Show("已加入購物車");
+                MessageBox.Show("已加入購物車");
+            }
         }
+            
     }
 }

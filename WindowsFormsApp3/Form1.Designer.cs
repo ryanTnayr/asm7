@@ -49,6 +49,11 @@ namespace WindowsFormsApp3
             this.cboxSweet = new System.Windows.Forms.ComboBox();
             this.cboxIce = new System.Windows.Forms.ComboBox();
             this.cboxAdd = new System.Windows.Forms.ComboBox();
+            this.btnDeletAdd2 = new System.Windows.Forms.Button();
+            this.cboxAdd2 = new System.Windows.Forms.ComboBox();
+            this.cboxAdd3 = new System.Windows.Forms.ComboBox();
+            this.btnDeletAdd1 = new System.Windows.Forms.Button();
+            this.btnDeletAdd3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -251,12 +256,69 @@ namespace WindowsFormsApp3
             this.cboxAdd.TabIndex = 19;
             this.cboxAdd.SelectedIndexChanged += new System.EventHandler(this.cboxAdd_SelectedIndexChanged);
             // 
+            // btnDeletAdd2
+            // 
+            this.btnDeletAdd2.BackColor = System.Drawing.Color.Red;
+            this.btnDeletAdd2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeletAdd2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnDeletAdd2.Location = new System.Drawing.Point(490, 344);
+            this.btnDeletAdd2.Name = "btnDeletAdd2";
+            this.btnDeletAdd2.Size = new System.Drawing.Size(24, 23);
+            this.btnDeletAdd2.TabIndex = 20;
+            this.btnDeletAdd2.Text = "-";
+            this.btnDeletAdd2.UseVisualStyleBackColor = false;
+            // 
+            // cboxAdd2
+            // 
+            this.cboxAdd2.FormattingEnabled = true;
+            this.cboxAdd2.Location = new System.Drawing.Point(385, 343);
+            this.cboxAdd2.Name = "cboxAdd2";
+            this.cboxAdd2.Size = new System.Drawing.Size(99, 20);
+            this.cboxAdd2.TabIndex = 21;
+            // 
+            // cboxAdd3
+            // 
+            this.cboxAdd3.FormattingEnabled = true;
+            this.cboxAdd3.Location = new System.Drawing.Point(385, 369);
+            this.cboxAdd3.Name = "cboxAdd3";
+            this.cboxAdd3.Size = new System.Drawing.Size(99, 20);
+            this.cboxAdd3.TabIndex = 22;
+            // 
+            // btnDeletAdd1
+            // 
+            this.btnDeletAdd1.BackColor = System.Drawing.Color.Red;
+            this.btnDeletAdd1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeletAdd1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnDeletAdd1.Location = new System.Drawing.Point(490, 317);
+            this.btnDeletAdd1.Name = "btnDeletAdd1";
+            this.btnDeletAdd1.Size = new System.Drawing.Size(24, 23);
+            this.btnDeletAdd1.TabIndex = 23;
+            this.btnDeletAdd1.Text = "-";
+            this.btnDeletAdd1.UseVisualStyleBackColor = false;
+            // 
+            // btnDeletAdd3
+            // 
+            this.btnDeletAdd3.BackColor = System.Drawing.Color.Red;
+            this.btnDeletAdd3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeletAdd3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnDeletAdd3.Location = new System.Drawing.Point(490, 369);
+            this.btnDeletAdd3.Name = "btnDeletAdd3";
+            this.btnDeletAdd3.Size = new System.Drawing.Size(24, 23);
+            this.btnDeletAdd3.TabIndex = 24;
+            this.btnDeletAdd3.Text = "-";
+            this.btnDeletAdd3.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(519, 533);
+            this.Controls.Add(this.btnDeletAdd3);
+            this.Controls.Add(this.btnDeletAdd1);
+            this.Controls.Add(this.cboxAdd3);
+            this.Controls.Add(this.cboxAdd2);
+            this.Controls.Add(this.btnDeletAdd2);
             this.Controls.Add(this.cboxAdd);
             this.Controls.Add(this.cboxIce);
             this.Controls.Add(this.cboxSweet);
@@ -306,6 +368,11 @@ namespace WindowsFormsApp3
         private System.Windows.Forms.ComboBox cboxSweet;
         private System.Windows.Forms.ComboBox cboxIce;
         private System.Windows.Forms.ComboBox cboxAdd;
+        private System.Windows.Forms.Button btnDeletAdd2;
+        private System.Windows.Forms.ComboBox cboxAdd2;
+        private System.Windows.Forms.ComboBox cboxAdd3;
+        private System.Windows.Forms.Button btnDeletAdd1;
+        private System.Windows.Forms.Button btnDeletAdd3;
     }
 }
 

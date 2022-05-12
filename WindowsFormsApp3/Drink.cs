@@ -14,8 +14,26 @@ namespace WindowsFormsApp3
         public int Cup = 0;
         public string Sweet = "";
         public string Ice = "";
-        public string[] Add=new string[3] ;
+        public string[] Add = new string[3];
         public int[] AddPrice = new int [3];
+        
+        
+        
+        public bool IsSame(Drink b)
+        {
+                if (this.Name == b.Name && 
+                    this.Price == b.Price && 
+                    this.Sweet == b.Sweet && 
+                    this.Ice == b.Ice ) 
+                {  return true; }
+                else
+                {
+                    return false;
+                }
+            //&&this.Add.Union(b.Add).Contains("null")
+        }
+    }   
 
-    }
+
+    
 }

@@ -16,6 +16,7 @@ namespace WindowsFormsApp3
         bool isTax = false;
         int intDiscountNum = 0;
         int intTotalPriceSum = 0;
+        int intDiscountCup = 0;
         public FormCart()
         {
             InitializeComponent();
@@ -45,15 +46,23 @@ namespace WindowsFormsApp3
                     }  
                 }
 
-
-
-
                 string strOneInfo = string.Format($"{strName},{intPrice},{intCup},{intTotalPrice},{strSweet},{strIce},{strAdd}{intAddPrice}");
                 //可以用格式化輸出，變成類excel
                 lboxOrderList.Items.Add(strOneInfo);
             }
 
         }
+        void calTotal()
+        {
+            //作業：計算訂單總價
+            intTotalPriceSum = 0;
+            for (int i = 0; i < GlobalVar.listOrderInformation.Count; i++)
+            {
+                intTotalPriceSum += GlobalVar.listOrderInformation[i].TotalPrice;
+            }
+            lblTotalPriceSum.Text = intTotalPriceSum.ToString() + "元";
+        }
+
 
         private void lboxOrderList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -77,31 +86,99 @@ namespace WindowsFormsApp3
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            lboxOrderList.Items.Clear();
-            GlobalVar.listOrderInformation.Clear();
-            calTotal();
+            DialogResult R = MessageBox.Show("您確定要移除所有項目","移除購物車",MessageBoxButtons.YesNo);
+            if (R == DialogResult.Yes)
+            {
+                lboxOrderList.Items.Clear();
+                GlobalVar.listOrderInformation.Clear();
+                calTotal();
+            }
+            else
+            {
+
+            }
+            
         }
 
 
 
         private void chkTax_CheckedChanged(object sender, EventArgs e)
         {
+            double tax = 1.05;
             if (chkTax.Checked)
             {
-                isTax = true;
-
                 //計算稅金
+                isTax = true;
+                intTotalPriceSum = Convert.ToInt32(intTotalPriceSum * tax);
+                lblTotalPriceSum.Text = intTotalPriceSum.ToString() + "元";     
             }
             else
             {
-                isTax = false;
                 //不計算稅金
+                isTax = false;
+                calTotal();
             }
         }
 
+        void calMinPrice()
+        {
+            List<int> priceList = new List<int>();
+            List<int> minIndex = new List<int>();
+            GlobalVar.listMinPriceInfomation.Clear();
+            //儲存所有單價
+            for(int i = 0; i < GlobalVar.listOrderInformation.Count; i++)
+            {
+                priceList.Add(GlobalVar.listOrderInformation[i].Price); 
+            }
+            //取得最低價格Index，儲存進list
+           
+            for (int i = 0; i < GlobalVar.listOrderInformation.Count; i++)
+            {
+                if(priceList.Min() == GlobalVar.listOrderInformation[i].Price)
+                {
+                    if (GlobalVar.listMinPriceInfomation.Count==0)
+                    {
+                        GlobalVar.listMinPriceInfomation.Add(GlobalVar.listOrderInformation[i]);
+                    }
+                    for (int j = 0;j< GlobalVar.listMinPriceInfomation.Count; j++)
+                    {
+                        if (GlobalVar.listMinPriceInfomation[j].IsSame(GlobalVar.listOrderInformation[i]))
+                        {
+                            break;
+                        }
+                        if(j == GlobalVar.listMinPriceInfomation.Count - 1)
+                        {
+                            GlobalVar.listMinPriceInfomation.Add(GlobalVar.listOrderInformation[i]);
+                        }
+                        
+                    }
+                    
+                }
+            }
+             
+        }
         private void radioDiscount1_CheckedChanged(object sender, EventArgs e)
         {
             intDiscountNum = 101;
+            if(GlobalVar.calDiscountCup(2) == 0 && radioDiscount1.Checked == true)
+            {
+                radioDiscount1.Checked = false;
+                MessageBox.Show("您的杯數未符合折扣條件");
+            }
+            else
+            {
+                FormDiscountCup formDiscountCup = new FormDiscountCup();
+                GlobalVar.FormDiscountCupVar = formDiscountCup;
+                calMinPrice();
+                formDiscountCup.Show();
+                
+            }
+            //TODO：排序價格，取得最低價格飲料之索引值(min > indexof)
+            //傳遞資訊：最低價格飲料資訊、折扣杯數
+            //for 顯示所有符合的飲料
+            //lbl 顯示 名稱 + 冰 + 甜 + 配料 + 單價
+            //預設折購杯數，讓使用者分配，儲存杯數，總價為零
+            //回傳飲料資訊，列印在listbox
         }
 
         private void radioDiscount2_CheckedChanged(object sender, EventArgs e)
@@ -113,15 +190,7 @@ namespace WindowsFormsApp3
         {
             intDiscountNum = 103;
         }
-        void calTotal()
-        {
-            //作業：計算訂單總價
-            for (int i = 0; i < GlobalVar.listOrderInformation.Count; i ++)
-            {
-                intTotalPriceSum += GlobalVar.listOrderInformation[i].TotalPrice;
-            }
-            lblTotalPriceSum.Text = intTotalPriceSum.ToString() + "元";
-        }
+        
 
         private void btnClose_Click(object sender, EventArgs e)
         {

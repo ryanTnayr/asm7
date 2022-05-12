@@ -9,3 +9,4 @@ C:\rt\C#\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.Gen
 C:\rt\C#\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.CoreCompileInputs.cache
 C:\rt\C#\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.exe
 C:\rt\C#\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.pdb
+C:\rt\C#\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.FormDiscountCup.resources
