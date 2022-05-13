@@ -29,22 +29,23 @@ namespace WindowsFormsApp3
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnEnter = new System.Windows.Forms.Button();
             this.lblFreeCup = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // btnEnter
             // 
-            this.button1.Location = new System.Drawing.Point(443, 237);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEnter.Location = new System.Drawing.Point(360, 26);
+            this.btnEnter.Name = "btnEnter";
+            this.btnEnter.Size = new System.Drawing.Size(75, 23);
+            this.btnEnter.TabIndex = 1;
+            this.btnEnter.Text = "確認";
+            this.btnEnter.UseVisualStyleBackColor = true;
+            this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
             // 
             // lblFreeCup
             // 
-            this.lblFreeCup.Location = new System.Drawing.Point(222, 203);
+            this.lblFreeCup.Location = new System.Drawing.Point(211, 26);
             this.lblFreeCup.Name = "lblFreeCup";
             this.lblFreeCup.Size = new System.Drawing.Size(100, 23);
             this.lblFreeCup.TabIndex = 2;
@@ -57,7 +58,7 @@ namespace WindowsFormsApp3
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 411);
             this.Controls.Add(this.lblFreeCup);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnEnter);
             this.Name = "FormDiscountCup";
             this.Text = "FormDiscountCup";
             this.Load += new System.EventHandler(this.FormDiscountCup_Load);
@@ -66,7 +67,7 @@ namespace WindowsFormsApp3
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnEnter;
         private System.Windows.Forms.Label lblFreeCup;
     }
 }

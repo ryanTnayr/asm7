@@ -37,8 +37,6 @@ namespace WindowsFormsApp3
             this.btnClear = new System.Windows.Forms.Button();
             this.chkTax = new System.Windows.Forms.CheckBox();
             this.radioDiscount1 = new System.Windows.Forms.RadioButton();
-            this.radioDiscount3 = new System.Windows.Forms.RadioButton();
-            this.radioDiscount2 = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -84,7 +82,7 @@ namespace WindowsFormsApp3
             this.lbl.AutoSize = true;
             this.lbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lbl.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbl.Location = new System.Drawing.Point(227, 498);
+            this.lbl.Location = new System.Drawing.Point(240, 482);
             this.lbl.Name = "lbl";
             this.lbl.Size = new System.Drawing.Size(88, 16);
             this.lbl.TabIndex = 3;
@@ -138,41 +136,13 @@ namespace WindowsFormsApp3
             this.radioDiscount1.UseVisualStyleBackColor = true;
             this.radioDiscount1.CheckedChanged += new System.EventHandler(this.radioDiscount1_CheckedChanged);
             // 
-            // radioDiscount3
-            // 
-            this.radioDiscount3.AutoSize = true;
-            this.radioDiscount3.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioDiscount3.Location = new System.Drawing.Point(8, 67);
-            this.radioDiscount3.Name = "radioDiscount3";
-            this.radioDiscount3.Size = new System.Drawing.Size(90, 17);
-            this.radioDiscount3.TabIndex = 8;
-            this.radioDiscount3.TabStop = true;
-            this.radioDiscount3.Text = "第二件半價";
-            this.radioDiscount3.UseVisualStyleBackColor = true;
-            this.radioDiscount3.CheckedChanged += new System.EventHandler(this.radioDiscount3_CheckedChanged);
-            // 
-            // radioDiscount2
-            // 
-            this.radioDiscount2.AutoSize = true;
-            this.radioDiscount2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioDiscount2.Location = new System.Drawing.Point(8, 44);
-            this.radioDiscount2.Name = "radioDiscount2";
-            this.radioDiscount2.Size = new System.Drawing.Size(77, 17);
-            this.radioDiscount2.TabIndex = 9;
-            this.radioDiscount2.TabStop = true;
-            this.radioDiscount2.Text = "買三送一";
-            this.radioDiscount2.UseVisualStyleBackColor = true;
-            this.radioDiscount2.CheckedChanged += new System.EventHandler(this.radioDiscount2_CheckedChanged);
-            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Salmon;
             this.groupBox1.Controls.Add(this.radioDiscount1);
-            this.groupBox1.Controls.Add(this.radioDiscount3);
-            this.groupBox1.Controls.Add(this.radioDiscount2);
             this.groupBox1.Location = new System.Drawing.Point(243, 378);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(125, 100);
+            this.groupBox1.Size = new System.Drawing.Size(125, 49);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "折扣活動";
@@ -203,7 +173,7 @@ namespace WindowsFormsApp3
             // 
             this.lblTotalPriceSum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblTotalPriceSum.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblTotalPriceSum.Location = new System.Drawing.Point(308, 498);
+            this.lblTotalPriceSum.Location = new System.Drawing.Point(321, 482);
             this.lblTotalPriceSum.Name = "lblTotalPriceSum";
             this.lblTotalPriceSum.Size = new System.Drawing.Size(60, 16);
             this.lblTotalPriceSum.TabIndex = 13;
@@ -247,8 +217,6 @@ namespace WindowsFormsApp3
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.CheckBox chkTax;
         private System.Windows.Forms.RadioButton radioDiscount1;
-        private System.Windows.Forms.RadioButton radioDiscount3;
-        private System.Windows.Forms.RadioButton radioDiscount2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSave;

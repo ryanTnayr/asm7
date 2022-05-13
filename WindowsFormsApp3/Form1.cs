@@ -87,7 +87,6 @@ namespace WindowsFormsApp3
             Array.Clear(strAdd, 0 , 3);
             Array.Clear(intAddPrice, 0, 3);
 
-
             int selIndex = lboxDrinkList.SelectedIndex;
             strName = listName[selIndex];
             intPrice = listPrice[selIndex];

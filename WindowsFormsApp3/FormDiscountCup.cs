@@ -33,7 +33,7 @@ namespace WindowsFormsApp3
             {
                 Label lbl = new Label();
                 //轉換Add成字串
-                strAddTemp = "";  
+                strAddTemp = "";
                 for (int j = 0; j < GlobalVar.listMinPriceInfomation[i].Add.Length; j++)
                 {
                     if (GlobalVar.listMinPriceInfomation[i].Add[j] != null)
@@ -66,7 +66,7 @@ namespace WindowsFormsApp3
                 listnumUD.Add(numUD);
             }
             //贈送杯數自動填入
-            //listnumUD[0].Value = intFreeCup;
+            listnumUD[0].Value = intFreeCup;
 
         }
 
@@ -77,9 +77,8 @@ namespace WindowsFormsApp3
             //取得自己的控制權
             NumericUpDown num = (NumericUpDown)sender;
             //NumericUpDown num = sender as NumericUpDown; 也行
-            //MessageBox.Show(num.Name);
             decimal sumCup = 0;
-            for(int i = 0; i <listnumUD.Count; i++)
+            for (int i = 0; i < listnumUD.Count; i++)
             {
                 sumCup += listnumUD[i].Value;
             }
@@ -89,5 +88,27 @@ namespace WindowsFormsApp3
                 num.Value -= 1;
             }
         }
+
+        private void btnEnter_Click(object sender, EventArgs e)
+        {
+            //foreach (Drink i in GlobalVar.listMinPriceInfomation)
+            //{
+            //    _mylist.Add(i);
+            //}
+            //GlobalVar.test();
+            for (int i = 0; i < GlobalVar.listMinPriceInfomation.Count; i++)
+            {
+                GlobalVar.listMinPriceInfomation[i].Name += "(送)";
+                GlobalVar.listMinPriceInfomation[i].Cup = (int)listnumUD[i].Value;
+                GlobalVar.listMinPriceInfomation[i].TotalPrice = 0;
+            }
+
+            
+
+            FormCart formCart = new FormCart();
+            formCart.Show();
+            this.Hide();
+        }
+        
     }
 }

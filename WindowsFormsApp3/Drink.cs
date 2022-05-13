@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp3
 {
-    class Drink
+    class Drink: ICloneable
     {
         public string Name = "";
         public int Price = 0;
@@ -21,17 +21,25 @@ namespace WindowsFormsApp3
         
         public bool IsSame(Drink b)
         {
-                if (this.Name == b.Name && 
-                    this.Price == b.Price && 
-                    this.Sweet == b.Sweet && 
-                    this.Ice == b.Ice ) 
-                {  return true; }
-                else
-                {
-                    return false;
-                }
-            //&&this.Add.Union(b.Add).Contains("null")
+            if (this.Name == b.Name &&
+                this.Price == b.Price &&
+                this.Sweet == b.Sweet &&
+                this.Ice == b.Ice )//&&
+                //this.Add.Union(b.Add) == this.Add)
+            { 
+                return true; 
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        object ICloneable.Clone()
+        {
+            throw new NotImplementedException();
+        }
+        
     }   
 
 

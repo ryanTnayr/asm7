@@ -24,37 +24,13 @@ namespace WindowsFormsApp3
 
         private void FormCart_Load(object sender, EventArgs e)
         {
-
             calTotal();
             lblPeople.Text = GlobalVar.orderPeople;
-            foreach (Drink arrOrderInfo in GlobalVar.listOrderInformation)
-            {
-                string strName = arrOrderInfo.Name;
-                int intPrice =arrOrderInfo.Price;
-                int intCup =arrOrderInfo.Cup;
-                int intTotalPrice = arrOrderInfo.TotalPrice;
-                string strSweet = arrOrderInfo.Sweet;
-                string strIce = arrOrderInfo.Ice;
-                string strAdd = "";
-                int intAddPrice = 0;
-                for (int i = 0; i < arrOrderInfo.Add.Length; i++)
-                {
-                    if (arrOrderInfo.Add[i] != null)
-                    {
-                        strAdd += arrOrderInfo.Add[i] + " ,";
-                        intAddPrice += arrOrderInfo.AddPrice[i];
-                    }  
-                }
-
-                string strOneInfo = string.Format($"{strName},{intPrice},{intCup},{intTotalPrice},{strSweet},{strIce},{strAdd}{intAddPrice}");
-                //可以用格式化輸出，變成類excel
-                lboxOrderList.Items.Add(strOneInfo);
-            }
-
+            GlobalVar.printList(GlobalVar.listOrderInformation, lboxOrderList.Items);
+            GlobalVar.printList(GlobalVar.listMinPriceInfomation, lboxOrderList.Items);
         }
         void calTotal()
-        {
-            //作業：計算訂單總價
+        {//計算訂單總價
             intTotalPriceSum = 0;
             for (int i = 0; i < GlobalVar.listOrderInformation.Count; i++)
             {
@@ -73,10 +49,22 @@ namespace WindowsFormsApp3
         {
             if (lboxOrderList.SelectedIndex >= 0)
             {
-                int selIndex = lboxOrderList.SelectedIndex;
-                lboxOrderList.Items.RemoveAt(selIndex);
-                GlobalVar.listOrderInformation.RemoveAt(selIndex);
-                calTotal();
+                if(lboxOrderList.SelectedIndex < GlobalVar.listOrderInformation.Count)
+                {
+                    int selIndex = lboxOrderList.SelectedIndex;
+                    lboxOrderList.Items.RemoveAt(selIndex);
+                    GlobalVar.listOrderInformation.RemoveAt(selIndex);
+                    calTotal();
+                    radioDiscount1.Checked = false;
+                }
+                else
+                {
+                    lboxOrderList.Items.RemoveAt(lboxOrderList.SelectedIndex);
+                    GlobalVar.listMinPriceInfomation.RemoveAt(lboxOrderList.SelectedIndex- GlobalVar.listOrderInformation.Count);
+                    calTotal();
+                    radioDiscount1.Checked = false;
+                }
+
             }
             else
             {
@@ -92,12 +80,8 @@ namespace WindowsFormsApp3
                 lboxOrderList.Items.Clear();
                 GlobalVar.listOrderInformation.Clear();
                 calTotal();
-            }
-            else
-            {
-
-            }
-            
+                radioDiscount1.Checked = false;
+            }    
         }
 
 
@@ -106,15 +90,13 @@ namespace WindowsFormsApp3
         {
             double tax = 1.05;
             if (chkTax.Checked)
-            {
-                //計算稅金
+            {//計算稅金
                 isTax = true;
                 intTotalPriceSum = Convert.ToInt32(intTotalPriceSum * tax);
                 lblTotalPriceSum.Text = intTotalPriceSum.ToString() + "元";     
             }
             else
-            {
-                //不計算稅金
+            {//不計算稅金
                 isTax = false;
                 calTotal();
             }
@@ -130,7 +112,7 @@ namespace WindowsFormsApp3
             {
                 priceList.Add(GlobalVar.listOrderInformation[i].Price); 
             }
-            //取得最低價格Index，儲存進list
+            //取得最低價格Index，儲存進list，且避免重複項目
            
             for (int i = 0; i < GlobalVar.listOrderInformation.Count; i++)
             {
@@ -138,7 +120,14 @@ namespace WindowsFormsApp3
                 {
                     if (GlobalVar.listMinPriceInfomation.Count==0)
                     {
-                        GlobalVar.listMinPriceInfomation.Add(GlobalVar.listOrderInformation[i]);
+                        Drink mindrink = new Drink();
+                        mindrink.Name = GlobalVar.listOrderInformation[i].Name;
+                        mindrink.Price = GlobalVar.listOrderInformation[i].Price;
+                        mindrink.Ice = GlobalVar.listOrderInformation[i].Ice;
+                        mindrink.Sweet = GlobalVar.listOrderInformation[i].Sweet;
+                        mindrink.Add = GlobalVar.listOrderInformation[i].Add.ToArray<string>();
+                        //mindrink.Add.CopyTo(GlobalVar.listOrderInformation[i].Add,0);
+                        GlobalVar.listMinPriceInfomation.Add(mindrink);
                     }
                     for (int j = 0;j< GlobalVar.listMinPriceInfomation.Count; j++)
                     {
@@ -148,49 +137,44 @@ namespace WindowsFormsApp3
                         }
                         if(j == GlobalVar.listMinPriceInfomation.Count - 1)
                         {
-                            GlobalVar.listMinPriceInfomation.Add(GlobalVar.listOrderInformation[i]);
+                            Drink mindrink = new Drink();
+                            mindrink.Name = GlobalVar.listOrderInformation[i].Name;
+                            mindrink.Price = GlobalVar.listOrderInformation[i].Price;
+                            mindrink.Ice = GlobalVar.listOrderInformation[i].Ice;
+                            mindrink.Sweet = GlobalVar.listOrderInformation[i].Sweet;
+                            mindrink.Add = GlobalVar.listOrderInformation[i].Add.ToArray<string>();
+                            //mindrink.Add.CopyTo(GlobalVar.listOrderInformation[i].Add,0);
+                            GlobalVar.listMinPriceInfomation.Add(mindrink);
                         }
-                        
-                    }
-                    
+                    }    
                 }
             }
              
         }
         private void radioDiscount1_CheckedChanged(object sender, EventArgs e)
         {
-            intDiscountNum = 101;
-            if(GlobalVar.calDiscountCup(2) == 0 && radioDiscount1.Checked == true)
-            {
-                radioDiscount1.Checked = false;
-                MessageBox.Show("您的杯數未符合折扣條件");
-            }
-            else
+            if (GlobalVar.calDiscountCup(2) > 0 && radioDiscount1.Checked == true)
             {
                 FormDiscountCup formDiscountCup = new FormDiscountCup();
                 GlobalVar.FormDiscountCupVar = formDiscountCup;
                 calMinPrice();
                 formDiscountCup.Show();
-                
+                this.Hide();
             }
-            //TODO：排序價格，取得最低價格飲料之索引值(min > indexof)
+            else if (GlobalVar.calDiscountCup(2) == 0 && radioDiscount1.Checked == true)
+            {  
+                MessageBox.Show("您的杯數未符合折扣條件");
+                radioDiscount1.Checked = false;
+            }
+
+            //TODO：FormDicountCup要做的事
+            //排序價格，取得最低價格飲料之索引值(min > indexof)
             //傳遞資訊：最低價格飲料資訊、折扣杯數
             //for 顯示所有符合的飲料
             //lbl 顯示 名稱 + 冰 + 甜 + 配料 + 單價
             //預設折購杯數，讓使用者分配，儲存杯數，總價為零
             //回傳飲料資訊，列印在listbox
         }
-
-        private void radioDiscount2_CheckedChanged(object sender, EventArgs e)
-        {
-            intDiscountNum = 102;
-        }
-
-        private void radioDiscount3_CheckedChanged(object sender, EventArgs e)
-        {
-            intDiscountNum = 103;
-        }
-        
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -235,22 +219,9 @@ namespace WindowsFormsApp3
             listOrderInfo.Add("訂購時間：" + DateTime.Now.ToString() + "訂購人：" + GlobalVar.orderPeople);
             listOrderInfo.Add("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             listOrderInfo.Add("************訂購品項*************");
-            //foreach 可以寫成方法 
-            foreach (Drink arrOrderInfo in GlobalVar.listOrderInformation)
-            {
-                string strName = arrOrderInfo.Name;
-                int intPrice = arrOrderInfo.Price;
-                int intCup = arrOrderInfo.Cup;
-                int intTotalPrice = arrOrderInfo.TotalPrice;
-                string strSweet = arrOrderInfo.Sweet;
-                string strIce = arrOrderInfo.Ice;
-                string[] strAdd = arrOrderInfo.Add;
-                int[] intAddPrice = arrOrderInfo.AddPrice;
+            //foreach 可以寫成方法
+            GlobalVar.printList(GlobalVar.listOrderInformation, listOrderInfo);
 
-                string strOneInfo = string.Format($"{strName},{intPrice},{intCup},{intTotalPrice},{strSweet},{strIce},{strAdd},{intAddPrice}");
-                //可以用格式化輸出，變成類excel
-                listOrderInfo.Add(strOneInfo);
-            }
             listOrderInfo.Add("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             listOrderInfo.Add("折扣：" + "稅金：");
             listOrderInfo.Add("總價：" + intTotalPriceSum);
@@ -260,5 +231,6 @@ namespace WindowsFormsApp3
             System.IO.File.WriteAllLines(strCompFilePlace, listOrderInfo, Encoding.UTF8);
             MessageBox.Show("存檔成功");
         }
+        
     }
 }
